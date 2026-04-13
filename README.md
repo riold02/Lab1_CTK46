@@ -1,2 +1,3 @@
-# Lab1_CTK46
-Bài thực hành 1 - Thiết lập môi trường phát triển
+# Bài Thực Hành 1
+
+Đây là project thực hành cho môn Các công nghệ mới trong PTPM.
