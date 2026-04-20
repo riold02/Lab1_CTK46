@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Country } from "@/types/country";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,7 +11,7 @@ interface CountryDetailPageProps {
 
 async function getCountry(code: string): Promise<Country | null> {
   const res = await fetch(
-    `https://restcountries.com/v3.1/alpha/${code}?fields=name,cca3,region,subregion,population,capital,flags,languages,currencies,area,timezones`,
+    `https://restcountries.com/v3.1/alpha/${code}?fields=name,cca3,flag,region,subregion,population,capital,languages,currencies,area,timezones`,
     { next: { revalidate: 300 } }
   );
 
@@ -51,13 +50,9 @@ export default async function CountryDetailPage({ params }: CountryDetailPagePro
 
       <Card className="mt-4">
         <CardHeader>
-          <Image
-            src={country.flags.png || country.flags.svg}
-            alt={country.flags.alt || `Cờ ${country.name.common}`}
-            width={800}
-            height={420}
-            className="w-full h-56 object-cover rounded-md border"
-          />
+          <div className="w-full h-56 rounded-md border flex items-center justify-center text-9xl bg-zinc-50 dark:bg-zinc-900">
+            <span aria-label={`Cờ ${country.name.common}`}>{country.flag ?? "🏳️"}</span>
+          </div>
           <div className="flex flex-wrap items-center gap-2 mt-4">
             <CardTitle className="text-3xl">{country.name.common}</CardTitle>
             <Badge variant="secondary">{country.cca3}</Badge>

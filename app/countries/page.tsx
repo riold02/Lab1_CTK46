@@ -1,12 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Country } from "@/types/country";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 async function getCountries(): Promise<Country[]> {
   const res = await fetch(
-    "https://restcountries.com/v3.1/all?fields=name,cca3,region,population,capital,flags",
+    "https://restcountries.com/v3.1/all?fields=name,cca3,flag,region,population,capital",
     { next: { revalidate: 300 } }
   );
 
@@ -29,17 +28,13 @@ export default async function CountriesPage() {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {countries.slice(0, 60).map((country) => (
+        {countries.map((country) => (
           <Link key={country.cca3} href={`/countries/${country.cca3}`}>
             <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
               <CardHeader>
-                <Image
-                  src={country.flags.png || country.flags.svg}
-                  alt={country.flags.alt || `Cờ ${country.name.common}`}
-                  width={320}
-                  height={200}
-                  className="w-full h-36 object-cover rounded-md border"
-                />
+                <div className="w-full h-36 rounded-md border flex items-center justify-center text-7xl bg-zinc-50 dark:bg-zinc-900">
+                  <span aria-hidden>{country.flag ?? "🏳️"}</span>
+                </div>
                 <CardTitle className="mt-3">{country.name.common}</CardTitle>
                 <CardDescription>{country.name.official}</CardDescription>
               </CardHeader>

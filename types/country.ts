@@ -12,6 +12,7 @@ export interface CountryFlag {
 export interface Country {
   name: CountryName;
   cca3: string;
+  flag?: string;
   region: string;
   subregion?: string;
   population: number;
