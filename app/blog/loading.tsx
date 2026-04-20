@@ -3,8 +3,11 @@ export default function BlogLoading() {
     <div>
       <div className="h-8 w-48 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse mb-6" />
       <div className="space-y-6">
-        {[1, 2, 3].map((item) => (
-          <div key={item} className="border border-zinc-200 dark:border-zinc-800 rounded-lg p-6">
+        {[1, 2, 3, 4].map((item) => (
+          <div
+            key={item}
+            className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-6"
+          >
             <div className="flex gap-3 mb-3">
               <div className="h-5 w-20 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />
               <div className="h-5 w-24 bg-zinc-200 dark:bg-zinc-800 rounded animate-pulse" />

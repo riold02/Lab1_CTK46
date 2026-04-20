@@ -1,5 +1,8 @@
-import Link from "next/link";
 import { projects } from "@/data/projects";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function ProjectsPage() {
   return (
@@ -7,40 +10,29 @@ export default function ProjectsPage() {
       <h1 className="text-3xl font-bold mb-6">Dự án</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {projects.map((project) => (
-          <div
-            key={project.id}
-            className="border border-zinc-200 dark:border-zinc-800 rounded-lg p-6 hover:shadow-md transition-shadow flex flex-col bg-white dark:bg-zinc-900"
-          >
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-xl font-semibold">{project.title}</h2>
-              <span
-                className={`text-xs px-2 py-1 rounded-full ${
-                  project.status === "Hoàn thành"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-yellow-100 text-yellow-700"
-                }`}
-              >
-                {project.status}
-              </span>
-            </div>
-            <p className="text-zinc-600 dark:text-zinc-300 mb-4 flex-1">{project.description}</p>
-            <Link
-              href={`/projects/${project.id}`}
-              className="mb-4 inline-block text-emerald-600 hover:underline text-sm"
-            >
-              Xem chi tiết →
-            </Link>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="bg-emerald-100 text-emerald-700 text-sm px-3 py-1 rounded-full"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          <Card key={project.id} className="hover:shadow-md transition-shadow">
+            <CardHeader>
+              <div className="flex items-center justify-between gap-2">
+                <CardTitle className="text-lg">{project.title}</CardTitle>
+                <Badge variant={project.status === "Hoàn thành" ? "secondary" : "outline"}>
+                  {project.status}
+                </Badge>
+              </div>
+              <CardDescription>{project.description}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <Badge key={tech} variant="outline">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+              <Link href={`/projects/${project.id}`}>
+                <Button variant="outline">Xem chi tiết</Button>
+              </Link>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

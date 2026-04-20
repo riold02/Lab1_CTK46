@@ -9,6 +9,8 @@ const navItems = [
   { href: "/skills", label: "Kỹ năng" },
   { href: "/blog", label: "Blog" },
   { href: "/projects", label: "Dự án" },
+  { href: "/guestbook", label: "Lưu bút" },
+  { href: "/countries", label: "Quốc gia API" },
   { href: "/contact", label: "Liên hệ" },
 ];
 
